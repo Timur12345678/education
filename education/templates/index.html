@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="media/css/style.css">
+</head>
+<body>
+{% if user_id%}
+   hello {{user_id}}.
+{%else%}
+<h2>not found</h2>
+   <a href="/login">LOGIN</a>
+
+
+{%endif%}
+</body>
+</html>

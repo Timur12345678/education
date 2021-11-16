@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div style="margin: 0 auto; text-align: center">
+    <h3>LOGIN FORM</h3>
+
+    {% if post_error %}
+     <h4 style="color:red">{{post_error}}</h4>
+    {% endif%}
+    <form action="/login/" method="POST" style="border: 1px solid red; width: 450px; margin: 0 auto;">
+        {% csrf_token %}
+        <br>
+        <input type="text" name="phone" placeholder="77771234567"> <br> <br>
+        <input type="password" name="password" placeholder="password"> <br> <br>
+        <button>LOGIN</button>
+        <br> <br>
+    </form>
+
+
+    <h3 style="color: brown"    >REGISTER</h3>
+    <a href="/register">REGISTER</a>
+</div>
+</body>
+</html>

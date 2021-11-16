@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h5 style="color: brown">Register</h5>
+<div style="margin: 0 auto; text-align: center">
+    <h3>REGISTER FORM</h3>
+    <form action="/register/" method="POST" style="border: 1px solid red; width: 470px; margin: 0 auto;">
+        {% csrf_token %}
+        <br>
+        phone->>
+        <input type="text" name="phone" placeholder="77771234567">
+        <br>
+        <br><button>REGISTER</button><br>
+    </form>
+
+
+
+</div>
+</body>
+</html>
