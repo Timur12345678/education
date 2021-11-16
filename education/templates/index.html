@@ -6,8 +6,14 @@
     <link rel="stylesheet" href="media/css/style.css">
 </head>
 <body>
-{% if user_id%}
-   hello {{user_id}}.
+{% if active_user%}
+ID -> {{active_user.id}}<br>
+phone -> {{active_user.phone}}.<br>
+FULL NAME ->{{active_user.last_name}} {{active_user.first_name}} <br>
+
+    <a href="/edit">
+        Edit profile
+    </a>
 {%else%}
 <h2>not found</h2>
    <a href="/login">LOGIN</a>

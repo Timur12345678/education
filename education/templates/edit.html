@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+Edit html
+{% if active_user%}
+    {% if post_errors%}
+        {%for pe in post_errors%}
+<h4 style="color:red;">{{pe}}</h4>
+    {% endfor %}
+{%endif%}
+<form action="/edit/" method="POST">
+    {%csrf_token%}
+    <table>
+        <tr>
+            <td>Last name</td>
+            <td>
+                <input type="text" name="last_name" value="{{active_user.last_name}}">
+            </td>
+        </tr>
+        <tr>
+            <td>First name</td>
+            <td>
+                <input type="text" name="first_name" value="{{active_user.first_name}}">
+            </td>
+        </tr>
+        <tr>
+            <td>Middle name</td>
+            <td>
+                <input type="text" name="middle_name" value="{{active_user.middle_name}}">
+            </td>
+        </tr>
+        <tr>
+            <td>iin</td>
+            <td>
+                <input type="text" name="iin" value="{{active_user.iin}}">
+            </td>
+        </tr>
+        <tr>
+            <td>Email</td>
+            <td>
+                <input type="text" name="email" value="{{active_user.email}}">
+            </td>
+        </tr>
+        <tr>
+            <td>Action</td>
+            <td>
+                <button>SAVE</button>
+            </td>
+        </tr>
+    </table>
+</form>
+{%else%}
+
+{%endif%}
+
+</body>
+</html>

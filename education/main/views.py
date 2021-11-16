@@ -3,46 +3,54 @@ from main.models import SiteUser
 import random
 import requests
 from django.shortcuts import redirect
+import re
+
+email_regex = re.compile(r"^[\w\.\+\-]+\@[\w]+\.[a-z]{2,3}$")
+phone_regexp = re.compile(r'^77[0-9]{9}$')
+iin_regexp = re.compile(r'[0-9]{12}$')
 
 
-def get_random_number(random_len):#0000 -- 9999
+def get_random_number(random_len):  # 0000 -- 9999
     random_len = int(random_len)
     a = pow(10, random_len)
-    b = pow(10, random_len-1)
-    n = random.randint(b,a)
+    b = pow(10, random_len - 1)
+    n = random.randint(b, a)
     return n
+
 
 def send_messahe(phone, sms):
     sms_domain = 'https://smsc.kz/sys/send.php'
     sms_params = {
         'login': 'timaedgarov',
-        'psw':'hacklink98',
+        'psw': 'hacklink98',
         'mes': sms,
-        'fmt':3,
+        'fmt': 3,
         'phones': phone
     }
-    r= requests.post(sms_domain, data=sms_params)
+    r = requests.post(sms_domain, data=sms_params)
     print(r.status_code)
     print(r.json())
     print(phone)
     print(sms)
 
-def mainHandler(request):
 
+def mainHandler(request):
     user_id = request.session.get('user_id', None)
     active_user = None
 
     if user_id:
-        active_user = SiteUser.objects.get(id = int(user_id))
+        active_user = SiteUser.objects.get(id=int(user_id))
 
-    return render(request, 'index.html',{ 'user_id': user_id,  'active_user': active_user})
+    return render(request, 'index.html', {'user_id': user_id, 'active_user': active_user})
+
+
 # Create your views here.
 
 def loginHandler(request):
     post_error = ''
     if request.POST:
-        phone= request.POST.get('phone','')
-        password= request.POST.get('password')
+        phone = request.POST.get('phone', '')
+        password = request.POST.get('password')
         if phone and password:
             site_user = SiteUser.objects.filter(phone=phone).filter(password=password)
             if site_user:
@@ -54,16 +62,16 @@ def loginHandler(request):
         else:
             post_error = 'Arguments ERROR'
 
-    return render(request, 'login.html',{'post_error': post_error  })
-
+    return render(request, 'login.html', {'post_error': post_error})
 
 
 def logoutHandler(request):
-    return render(request, 'logout.html',{ })
+    return render(request, 'logout.html', {})
+
 
 def registerHandler(request):
     if request.POST:
-        phone= request.POST.get('phone','')
+        phone = request.POST.get('phone', '')
         if phone:
             if len(phone) == 11:
                 site_user = SiteUser.objects.filter(phone=phone)
@@ -87,5 +95,47 @@ def registerHandler(request):
 
         else:
             print('NO ARGS')
-    return render(request, 'register.html',{ })
+    return render(request, 'register.html', {})
 
+
+def editHandler(request):
+    user_id = request.session.get('user_id', None)
+    active_user = None
+    post_errors = []
+
+    if user_id:
+        active_user = SiteUser.objects.get(id=int(user_id))
+
+    if request.POST:
+        last_name = request.POST.get('last_name', '')
+        first_name = request.POST.get('first_name', '')
+        middle_name = request.POST.get('middle_name', '')
+        iin = request.POST.get('iin', '')
+        email = request.POST.get('email', '')
+
+        active_user.last_name = last_name
+        active_user.first_name = first_name
+        active_user.middle_name = middle_name
+        if iin:
+            if iin_regexp.match(iin):
+                active_user.iin = iin
+            else:
+                post_errors.append('IIN format error')
+
+        if email:
+            if email_regex.match(email):
+                email_users = SiteUser.objects.filter(email=email)
+                if email_users:
+                    email_user = email_users[0]
+                    if email_user.id == active_user.id:
+                        pass
+                    else:
+                        post_errors.append('This email already registered')
+                else:
+                    active_user.email = email
+
+            else:
+                post_errors.append('Email format error')
+        active_user.save()
+
+    return render(request, 'edit.html', {'user_id': user_id, 'active_user': active_user, 'post_errors': post_errors})

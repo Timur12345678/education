@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from main.views import mainHandler,loginHandler,logoutHandler,registerHandler
+from main.views import mainHandler,loginHandler,logoutHandler,registerHandler, editHandler
 from django.conf.urls import url
 from django.views.static import serve
 from education import settings
@@ -23,6 +23,7 @@ from education import settings
 urlpatterns = [
     path('',mainHandler),
     path('login/', loginHandler),
+    path('edit/', editHandler),
     path('logout/', logoutHandler),
     path('register/', registerHandler),
     path('admin/', admin.site.urls),
