@@ -7,6 +7,8 @@
 <body>
 Edit html
 {% if active_user%}
+<br>
+<a href="/logout/"> Log out</a>
     {% if post_errors%}
         {%for pe in post_errors%}
 <h4 style="color:red;">{{pe}}</h4>

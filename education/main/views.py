@@ -49,10 +49,13 @@ def mainHandler(request):
 def loginHandler(request):
     post_error = ''
     if request.POST:
-        phone = request.POST.get('phone', '')
+        login = request.POST.get('login', '') # phone or email
         password = request.POST.get('password')
-        if phone and password:
-            site_user = SiteUser.objects.filter(phone=phone).filter(password=password)
+        if login and password:
+            site_user = SiteUser.objects.filter(phone=login).filter(password=password)
+            if not site_user:
+                site_user = SiteUser.objects.filter(email=login).filter(password=password)
+
             if site_user:
                 site_user = site_user[0]
                 request.session['user_id'] = site_user.id
@@ -66,7 +69,9 @@ def loginHandler(request):
 
 
 def logoutHandler(request):
-    return render(request, 'logout.html', {})
+    request.session['user_id'] = None
+    return redirect('/')
+    #return render(request, 'logout.html', {})
 
 
 def registerHandler(request):
