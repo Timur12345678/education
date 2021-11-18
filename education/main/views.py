@@ -4,6 +4,7 @@ import random
 import requests
 from django.shortcuts import redirect
 import re
+from hashlib import md5
 
 email_regex = re.compile(r"^[\w\.\+\-]+\@[\w]+\.[a-z]{2,3}$")
 phone_regexp = re.compile(r'^77[0-9]{9}$')
@@ -52,9 +53,14 @@ def loginHandler(request):
         login = request.POST.get('login', '') # phone or email
         password = request.POST.get('password')
         if login and password:
-            site_user = SiteUser.objects.filter(phone=login).filter(password=password)
+
+            temp_hash = md5()
+            temp_hash.update(password.encode())
+            password_hash = temp_hash.hexdigest()
+
+            site_user = SiteUser.objects.filter(phone=login).filter(password=password_hash)
             if not site_user:
-                site_user = SiteUser.objects.filter(email=login).filter(password=password)
+                site_user = SiteUser.objects.filter(email=login).filter(password=password_hash)
 
             if site_user:
                 site_user = site_user[0]
@@ -82,17 +88,33 @@ def registerHandler(request):
                 site_user = SiteUser.objects.filter(phone=phone)
                 if site_user:
                     new_site_user = site_user[0]
-                    new_site_user.password = get_random_number(6)
+                    old_password = str(get_random_number(6))
+
+                    print(old_password)
+
+                    password_hash = md5()
+                    password_hash.update(old_password.encode())
+                    new_password = password_hash.hexdigest()
+
+                    new_site_user.password = new_password
                     new_site_user.save()
-                    message = 'You login code:' + str(new_site_user.password)
+                    message = 'You login code:' + str(old_password)
                     send_messahe(phone, message)
                     return redirect('/login/')
                 else:
                     new_site_user = SiteUser()
                     new_site_user.phone = phone
-                    new_site_user.password = get_random_number(6)
+                    old_password = str(get_random_number(6))
+
+                    print(old_password)
+
+                    password_hash = md5()
+                    password_hash.update(old_password.encode())
+                    new_password = password_hash.hexdigest()
+
+                    new_site_user.password = new_password
                     new_site_user.save()
-                    message = 'You login code:' + str(new_site_user.password)
+                    message = 'You login code:' + str(old_password)
                     send_messahe(phone, message)
                     return redirect('/login/')
             else:
