@@ -50,7 +50,7 @@ def mainHandler(request):
 def loginHandler(request):
     post_error = ''
     if request.POST:
-        login = request.POST.get('login', '') # phone or email
+        login = request.POST.get('login', '')  # phone or email
         password = request.POST.get('password')
         if login and password:
 
@@ -77,7 +77,7 @@ def loginHandler(request):
 def logoutHandler(request):
     request.session['user_id'] = None
     return redirect('/')
-    #return render(request, 'logout.html', {})
+    # return render(request, 'logout.html', {})
 
 
 def registerHandler(request):
