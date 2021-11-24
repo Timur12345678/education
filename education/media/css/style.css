@@ -128,8 +128,47 @@ width: 31%;
 overflow: hidden;
 margin-right: 20px;
 margin-top: 20px;
+margin-top: 20px;
+margin-bottom: 20px;
 }
 
 .index-video-cont-item-top img{
 width: 100%;
 }
+
+.index-video-cont-item-bottom{
+font-size: 16px;
+line-height: 20px;
+padding-top: 10px;
+padding-bottom: 18px;
+}
+
+.index-video-cont-item-bottom a{
+color: white;
+text-decoration: none;
+}
+
+.index-video-cont-item-bottom a:hover{
+color: yellow;
+text-decoration: underline;
+}
+
+ .index-video-cont-item-top{
+ position:relative;
+
+ }
+ .index-video-cont-item-top span{
+ position:absolute;
+ left:0;
+ bottom: 0;
+ background-color: #c06149;
+ font-size: 18px;
+ line-height: 18px;
+ padding: 8px;
+ font-weight:bold;
+ margin-bottom: 4px;
+ }
+
+ .index-last-news{
+ padding-top: 30px;
+ }
