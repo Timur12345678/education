@@ -1,49 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-    <link rel="stylesheet" href="media/css/style.css">
-</head>
-<body>
+{%extends 'base.html' %}
 
-
-
-
-<!--
-{% if active_user%}
-ID -> {{active_user.id}}<br>
-phone -> {{active_user.phone}}.<br>
-FULL NAME ->{{active_user.last_name}} {{active_user.first_name}} <br>
-
-    <a href="/edit">
-        Edit profile
-    </a><br>
-<a href="/logout/"> Log out</a>
-
-{%else%}
-<h2>not found</h2>
-   <a href="/login">LOGIN</a>
-
-
-{%endif%}
--->
-
-<div class="top line">
-    <div class="middle">
-        <div class="top-left">
-            <a href="#">IT HUB</a>
-            <a href="#">Видеокурсы</a>
-            <a href="#">Тест и практика</a>
-            <a href="#">Программы обучения</a>
-        </div>
-        <div class="top-right">
-            <a href="#" class="btn btn-outline-success">Войти</a>
-            <a href="#" class="btn btn-outline-danger">Регистрация</a>
-        </div>
-
-    </div>
-</div>
+{%block content %}
 
 <div class="middle main-info">
     <div class="main-info-left">
@@ -212,14 +169,9 @@ FULL NAME ->{{active_user.last_name}} {{active_user.first_name}} <br>
               <a href="#" class="btn btn-danger">Посмотореть больше</a>
           </p>
 
-          <div class="line footer">
-              <div class="middle">
-                  Все права защищены
-              </div>
-          </div>
 
       </div>
   </div>
   </div>
-</body>
-</html>
+</div>
+{%endblock%}

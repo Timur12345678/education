@@ -15,13 +15,15 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from main.views import mainHandler,loginHandler,logoutHandler,registerHandler, editHandler
+from main.views import *
 from django.conf.urls import url
 from django.views.static import serve
 from education import settings
 
 urlpatterns = [
     path('',mainHandler),
+    path('courses/',courseHandler),
+    path('courses/item/', courseItemHandler),
     path('login/', loginHandler),
     path('edit/', editHandler),
     path('logout/', logoutHandler),

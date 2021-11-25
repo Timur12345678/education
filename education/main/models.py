@@ -35,16 +35,16 @@ class Course(models.Model):
     course_type = models.IntegerField(default=0, blank=True)  # 0 =vidio, 1 =audio, 2=text, 3=offline. 4 = online.
 
     info1 = models.CharField(blank=True, max_length=300)
-    info1_text = models.CharField(blank=True,max_length=300)
+    info1_text = models.TextField(blank=True)
 
     info2 = models.CharField(blank=True, max_length=300)
-    info2_text = models.CharField(blank=True,max_length=300)
+    info2_text = models.TextField(blank=True)
 
     info3 = models.CharField(blank=True, max_length=300)
-    info3_text = models.CharField(blank=True,max_length=300)
+    info3_text = models.TextField(blank=True)
 
     info4 = models.CharField(blank=True, max_length=300)
-    info4_text = models.CharField(blank=True,max_length=300)
+    info4_text = models.TextField(blank=True)
 
     def __str__(self):
         return self.title
@@ -74,6 +74,7 @@ class CourseItemParagraph(models.Model):
     description3 = models.TextField(blank=True)
     logo = models.ImageField(upload_to='upload', blank=True)
     course_item = models.ForeignKey(CourseItem, on_delete=models.CASCADE)
+    level = models.IntegerField(default=0,)
 
     def __str__(self):
         return self.course_item.title + '' + self.title

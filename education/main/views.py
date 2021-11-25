@@ -3,6 +3,7 @@ from main.models import SiteUser
 import random
 import requests
 from django.shortcuts import redirect
+from main.models import*
 import re
 from hashlib import md5
 
@@ -42,10 +43,32 @@ def mainHandler(request):
     if user_id:
         active_user = SiteUser.objects.get(id=int(user_id))
 
-    return render(request, 'index.html', {'user_id': user_id, 'active_user': active_user})
+    courses = Course.objects.all()
+    course_count = Course.objects.count()
+
+    return render(request, 'index.html', {'user_id': user_id, 'active_user': active_user, 'courses':courses, 'course_count':course_count })
 
 
-# Create your views here.
+def courseHandler(request):
+    user_id = request.session.get('user_id', None)
+    active_user = None
+
+    if user_id:
+        active_user = SiteUser.objects.get(id=int(user_id))
+
+    return render(request, 'course.html', {'user_id': user_id, 'active_user': active_user})
+
+
+
+def courseItemHandler(request):
+    user_id = request.session.get('user_id', None)
+    active_user = None
+
+    if user_id:
+        active_user = SiteUser.objects.get(id=int(user_id))
+
+    return render(request, 'course_item.html', {'user_id': user_id, 'active_user': active_user})
+
 
 def loginHandler(request):
     post_error = ''

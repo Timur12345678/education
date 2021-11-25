@@ -212,3 +212,151 @@ fomt-weight: bold;
  color: white;
  padding: 20px 0px;
  }
+
+ .index-last-news-cont-item-bottom-info{
+ font-size: 12px;
+ font-weight: bold;
+ }
+
+ .btn-outline-dark{
+ color: #212529;
+ border-color: #212529;
+ }
+
+ .btn-outline-dark:hover{
+ background-color: #212529;
+ border-color: #212529;
+ color: white;
+ }
+
+ .course-top-links{
+ padding: 10px 0;
+ margin-top: 15px;
+ }
+
+ .course-video-cont-item{
+display: inline-block;
+width: 31%;
+overflow: hidden;
+margin-right: 20px;
+margin-top: 20px;
+margin-top: 20px;
+margin-bottom: 20px;
+vertical-align:top;
+}
+
+.course-video-cont-item-top img{
+width: 100%;
+}
+
+.course-video-cont-item-bottom{
+font-size: 16px;
+line-height: 20px;
+padding-top: 10px;
+padding-bottom: 18px;
+}
+
+.course-video-cont-item-bottom a{
+color: black;
+text-decoration: none;
+}
+
+.course-video-cont-item-bottom a:hover{
+color: yellow;
+text-decoration: underline;
+}
+
+ .course-video-cont-item-top{
+ position:relative;
+
+ }
+ .course-video-cont-item-top span{
+ position:absolute;
+ left:0;
+ bottom: 0;
+ background-color: #c06149;
+ font-size: 18px;
+ line-height: 18px;
+ padding: 8px;
+ font-weight:bold;
+ margin-bottom: 4px;
+ color: white;
+ }
+
+
+.course-top h1{
+margin-top: 20px;
+
+}
+
+.course-item-header{
+background: linear-gradient(to left,#fe4a4b, #333);
+height: 80px;
+color: white;
+padding-top: 20px;
+}
+
+.course-item-header p{
+font-size: 14px;
+line-height: 30px;
+}
+
+.course-item-mini-left{
+display: inline-block;
+vertical-align: top;
+width:38%;
+}
+
+.course-item-mini-right{
+display: inline-block;
+vertical-align: top;
+width:60%;
+padding-left: 15px;
+}
+
+course-item-mini{
+margin: 20px 0;
+}
+
+.course-item-mini-left img{
+width: 100%;
+}
+
+course-item-mini-right-title{
+font-size: 22px;
+font-weight: bold;
+line-height: 26px;
+padding-bottom: 10px;
+}
+
+.course-item-mini-right-cat{
+font-size: 1opx;
+}
+.course-item-mini-right-desc{
+font-size: 18px;
+line-height: 28px;
+}
+
+course-item-info p{
+font-weight:bold;
+font-size: 18px;
+margin: 20px 0 10px 0;
+}
+
+.course-item-info-item{
+font-size: 15px;
+line-height:24px;
+}
+
+.course-item-info-item img{
+width: 60%;
+}
+
+.course-item-info-item img.center{
+text-align: center;
+
+}
+
+.course-item-info-item img.right{
+text-align: right;
+}
