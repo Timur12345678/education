@@ -23,7 +23,7 @@ from education import settings
 urlpatterns = [
     path('',mainHandler),
     path('courses/',courseHandler),
-    path('courses/item/', courseItemHandler),
+    path('courses/<int:course_id>/', courseItemHandler),
     path('login/', loginHandler),
     path('edit/', editHandler),
     path('logout/', logoutHandler),
