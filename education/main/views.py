@@ -57,17 +57,16 @@ def courseHandler(request):
     if user_id:
         active_user = SiteUser.objects.get(id=int(user_id))
 
-
     all_courses = Course.objects.all()
     all_categories = CourseCategory.objects.all()
 
     return render(request, 'course.html', {'user_id': user_id, 'active_user': active_user,
-                                           'all_courses':all_courses, 'all_categories': all_categories})
-
+                                           'all_courses': all_courses, 'all_categories': all_categories})
 
 
 def courseItemHandler(request, course_id):
-    active_lesson_number = request.GET.get('lesson',1)
+    active_lesson_number = int(request.GET.get('lesson', 1))
+    active_lesson_number_index = active_lesson_number-1
     user_id = request.session.get('user_id', None)
     active_user = None
 
@@ -75,22 +74,24 @@ def courseItemHandler(request, course_id):
         active_user = SiteUser.objects.get(id=int(user_id))
 
     course = Course.objects.get(id=course_id)
-    course_lesson_count = CourseItem.objects.filter(course_id = course_id).count()
+    course_lesson_count = CourseItem.objects.filter(course_id=course_id).count()
     lesson_counts = range(1, course_lesson_count + 1)
 
-    course_items = CourseItem.objects.filter(course__id = course_id)
+    course_items = CourseItem.objects.filter(course__id=course_id)
     first_course_item: None
-    paragraphs =[]
+    paragraphs = []
     if course_items:
-        first_course_item = course_items[0]
-
-
-
-        paragraphs = CourseItemParagraph.objects.filter(course_item__id = first_course_item.id)
-    return render(request, 'course_item.html', {'user_id': user_id, 'active_user': active_user,
-                                                'course': course, 'course_lesson_count': course_lesson_count,
-                                                'first_course_item':first_course_item, 'paragraphs': paragraphs,
-                                                'lesson_counts': lesson_counts, 'active_lesson_number': active_lesson_number})
+        if len(course_items) > active_lesson_number_index:
+            first_course_item = course_items[0]
+            paragraphs = CourseItemParagraph.objects.filter(course_item__id=first_course_item.id)
+    return render(request, 'course_item.html', {'user_id': user_id,
+                                                'active_user': active_user,
+                                                'course': course,
+                                                'course_lesson_count': course_lesson_count,
+                                                'first_course_item': first_course_item,
+                                                'paragraphs': paragraphs,
+                                                'lesson_counts': lesson_counts,
+                                                'active_lesson_number': active_lesson_number})
 
 
 def loginHandler(request):

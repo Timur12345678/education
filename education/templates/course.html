@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{%block content%}
+
+<div class="line">
+    <div class="middle">
+        <div class="course-top">
+            <h1>Курсы программирования</h1>
+            <div class="course-top-links">
+
+                <a href="#" class="btn btn-outline-dark">Все</a>
+                {% for cat in all_categories%}
+                <a href="#" data-id="{{cat.id}}" class="btn btn-outline-dark">{{cat.title}}</a>
+                {% endfor %}
+
+            </div>
+
+        </div>
+        <div class="course-cont">
+
+            <div class="course-video-cont">
+                {% for course in all_courses %}
+
+                <div class="course-video-cont-item">
+                    <div class="course-video-cont-item-top">
+                        <img src="/media/{{course.logo}}" alt="">
+                        <span>{{course.category.title}}</span>
+                    </div>
+                    <div class="course-video-cont-item-bottom">
+                        <a href="/courses/{{course.id}}"> {{course.title}}</a>
+                    </div>
+                </div>
+
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
